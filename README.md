@@ -16,3 +16,7 @@ The packages I used through out this whole project
 - library("maps")
 - library("mapdata")
 - library("geofacet")
+
+
+## create some important topics for investigation ( play around with the data) 
+create more imagines and visualizations.
