@@ -1,0 +1,86 @@
+1) File Structure
+workout1/
+       README.md
+       data/
+          Year.2010.ibtracs_all.v03r10.csv
+          ... # other data files
+          Year.2015.ibtracs_all.v03r10.csv
+          ibtracs-2010-2015.csv
+          ibtracs-dictionary.md
+       code/
+          make-ibtracs-data-script.txt
+          eda-script.R
+       output/
+          serial-numbers.txt
+          records-per-year.txt
+          basin-frequencies.txt
+          sub-basin-frequencies.txt
+          ... # other summary.txt files
+       images/
+          map-all-storms.pdf
+          map-ep-na-storms-by-year.pdf
+          map-ep-na-storms-by-month.pdf
+          ... # other image files in pdf and png formats
+       report/
+          workout1-first-last.Rmd   # your first and last names
+          workout1-first-last.md    # your first and last names
+
+2) Raw Data
+
+2.1) Download data files
+joedeMacBook-Pro:~ yuelinzhou$ cd stat133/workouts/data
+joedeMacBook-Pro:data yuelinzhou$ curl -O ftp://eclipse.ncdc.noaa.gov/pub/ibtracs/v03r10/all/csv/year/Year.2010.ibtracs_all.v03r10.csv
+joedeMacBook-Pro:data yuelinzhou$ curl -O ftp://eclipse.ncdc.noaa.gov/pub/ibtracs/v03r10/all/csv/year/Year.2011.ibtracs_all.v03r10.csv
+joedeMacBook-Pro:data yuelinzhou$ curl -O ftp://eclipse.ncdc.noaa.gov/pub/ibtracs/v03r10/all/csv/year/Year.2012.ibtracs_all.v03r10.csv
+joedeMacBook-Pro:data yuelinzhou$ curl -O ftp://eclipse.ncdc.noaa.gov/pub/ibtracs/v03r10/all/csv/year/Year.2013.ibtracs_all.v03r10.csv
+joedeMacBook-Pro:data yuelinzhou$ curl -O ftp://eclipse.ncdc.noaa.gov/pub/ibtracs/v03r10/all/csv/year/Year.2014.ibtracs_all.v03r10.csv
+joedeMacBook-Pro:data yuelinzhou$ curl -O ftp://eclipse.ncdc.noaa.gov/pub/ibtracs/v03r10/all/csv/year/Year.2015.ibtracs_all.v03r10.csv
+
+joedeMacBook-Pro:data yuelinzhou$ cd ../code
+joedeMacBook-Pro:code yuelinzhou$ touch make-ibtracs-data-script.txt
+
+2.2) Assembling ibtracs-2010-2015.csv
+joedeMacBook-Pro:data yuelinzhou$ head -2 Year.2010.ibtracs_all.v03r10.csv|tail +2|cut -f 1-12 -d "," > ibtracs-2010-2015.csv
+joedeMacBook-Pro:data yuelinzhou$ cat Year.2010.ibtracs_all.v03r10.csv|tail +4|cut -f 1-12 -d "," >> ibtracs-2010-2015.csv
+joedeMacBook-Pro:data yuelinzhou$ cat Year.2011.ibtracs_all.v03r10.csv|tail +4|cut -f 1-12 -d "," >> ibtracs-2010-2015.csv
+joedeMacBook-Pro:data yuelinzhou$ cat Year.2012.ibtracs_all.v03r10.csv|tail +4|cut -f 1-12 -d "," >> ibtracs-2010-2015.csv
+joedeMacBook-Pro:data yuelinzhou$ cat Year.2013.ibtracs_all.v03r10.csv|tail +4|cut -f 1-12 -d "," >> ibtracs-2010-2015.csv
+joedeMacBook-Pro:data yuelinzhou$ cat Year.2014.ibtracs_all.v03r10.csv|tail +4|cut -f 1-12 -d "," >> ibtracs-2010-2015.csv
+joedeMacBook-Pro:data yuelinzhou$ cat Year.2015.ibtracs_all.v03r10.csv|tail +4|cut -f 1-12 -d "," >> ibtracs-2010-2015.csv
+joedeMacBook-Pro:data yuelinzhou$ head -5 ibtracs-2010-2015.csv|cut -f 1-5 -d ","
+joedeMacBook-Pro:data yuelinzhou$ tail -5 ibtracs-2010-2015.csv|cut -f 1-5 -d ","
+
+2.3) Data Dictionary for ibtracs-2010-2015.csv 
+joedeMacBook-Pro:data yuelinzhou$ touch ibtracs-dictionary.md
+
+
+3) More Unix Redirections, Pipes, and Filters
+
+3.1) Serial Number of Storms (2010-2015)
+joedeMacBook-Pro:data yuelinzhou$ cut -f 1 -d "," ibtracs-2010-2015.csv|tail +2|uniq > serial-numbers.txt
+joedeMacBook-Pro:data yuelinzhou$ mv serial-numbers.txt ~/stat133/workouts/workout1/output/
+
+3.2) Total number of records in each year
+joedeMacBook-Pro:data yuelinzhou$ cut -f 2 -d "," ibtracs-2010-2015.csv|tail +2|uniq -c > records-per-year.txt
+joedeMacBook-Pro:data yuelinzhou$ mv records-per-year.txt ~/stat133/workouts/workout1/output/
+
+3.3) Basin Counts
+joedeMacBook-Pro:data yuelinzhou$ cut -f 4 -d "," ibtracs-2010-2015.csv|tail +2|sort|uniq -c > basin-frequencies.txt
+joedeMacBook-Pro:data yuelinzhou$ mv basin-frequencies.txt ~/stat133/workouts/workout1/output/
+
+3.4) Sub-Basin Counts
+joedeMacBook-Pro:data yuelinzhou$ cut -f 5 -d "," ibtracs-2010-2015.csv|tail +2|sort|uniq -c > sub-basin-frequencie.txt
+joedeMacBook-Pro:data yuelinzhou$ mv sub-basin-frequencies.txt ~/stat133/workouts/workout1/output/
+
+4) Data Importing in R
+joedeMacBook-Pro:code yuelinzhou$ touch eda-script.R
+code are inside eda-script.R
+
+5) Data Visualization 
+code are inside eda-script.R
+
+6) Report
+code and everything are in the workout1-yuelin-zhou.Rmd
+
+7) Submission: Github and bCourses
+done!
