@@ -20,3 +20,6 @@ The packages I used through out this whole project
 
 ## Create some important topics for investigation ( play around with the data) 
 create more imagines and visualizations.
+
+## Report
+The final part of this project is to create a report paper containing 8 important topics written in markdown language.
